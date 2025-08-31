@@ -1,4 +1,4 @@
-package organization;
+package contact;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class CreateOrgTest {
+public class CreateContactTest {
 	public static void main(String[] args) throws InterruptedException, IOException {
 
 		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
@@ -22,8 +22,8 @@ public class CreateOrgTest {
 		String BROWSER = pObj.getProperty("bro");
 		String URL = pObj.getProperty("url");
 		String USERNAME = pObj.getProperty("un");
-		String PASSWORD = pObj.getProperty("pwd");
-
+		String PASSWORD = pObj.getProperty("pwd");	
+		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -39,28 +39,29 @@ public class CreateOrgTest {
 
 		driver.findElement(By.id("submitButton")).click();
 
-//		Create an organization
-		driver.findElement(By.linkText("Organizations")).click();
-		driver.findElement(By.cssSelector("img[title='Create Organization...']")).click();
+//		Create new contact
 
-		String orgName = "qsp_" + (int) (Math.random() * 1000);
-		WebElement orgField = driver.findElement(By.name("accountname"));
-		orgField.sendKeys(orgName);
+		driver.findElement(By.linkText("Contacts")).click();
+		driver.findElement(By.cssSelector("img[alt='Create Contact...']")).click();
 
-		driver.findElement(By.cssSelector("input[title='Save [Alt+S]']")).click();
+//		Fill the form to create the contact
+		String lastName = "Singh";
+		driver.findElement(By.name("lastname")).sendKeys(lastName);
 
-		String actOrgName = driver.findElement(By.id("dtlview_Organization Name")).getText();
+		driver.findElement(By.className("save")).click();
 
-		if (actOrgName.equals(orgName)) {
-			System.out.println("Created organization successfullyyyy!!!");
+		String actLastName = driver.findElement(By.id("dtlview_Last Name")).getText();
+
+		if (actLastName.equals(lastName)) {
+			System.out.println("Created " + lastName + " successfully!!!");
 		} else {
-			System.out.println("Could not be created org.  :(");
+			System.out.println("Could not be Created contact successfully!!!");
 		}
 
 //		Logout
 		WebElement profile = driver.findElement(By.cssSelector("img[src='themes/softed/images/user.PNG']"));
 
-		Thread.sleep(50000);
+		Thread.sleep(3000);
 
 		Actions act = new Actions(driver);
 		act.moveToElement(profile).build().perform();
