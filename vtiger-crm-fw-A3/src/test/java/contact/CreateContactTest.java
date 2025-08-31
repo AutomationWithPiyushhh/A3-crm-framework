@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +18,7 @@ import org.openqa.selenium.interactions.Actions;
 
 public class CreateContactTest {
 	public static void main(String[] args) throws InterruptedException, IOException {
-
+//		Get the data from properties file
 		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
 
 		Properties pObj = new Properties();
@@ -22,8 +27,24 @@ public class CreateContactTest {
 		String BROWSER = pObj.getProperty("bro");
 		String URL = pObj.getProperty("url");
 		String USERNAME = pObj.getProperty("un");
-		String PASSWORD = pObj.getProperty("pwd");	
-		
+		String PASSWORD = pObj.getProperty("pwd");
+
+//		Get the data from excel file
+
+		FileInputStream fis1 = new FileInputStream("./src/test/resources/testScriptData.xlsx");
+
+		Workbook wb = WorkbookFactory.create(fis1);
+
+		Sheet sh = wb.getSheet("Contact");
+
+		Row row = sh.getRow(5);
+
+		Cell cell = row.getCell(0);
+
+		String lastName = cell.getStringCellValue();
+
+		wb.close();
+
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -45,7 +66,7 @@ public class CreateContactTest {
 		driver.findElement(By.cssSelector("img[alt='Create Contact...']")).click();
 
 //		Fill the form to create the contact
-		String lastName = "Singh";
+//		String lastName = "Singh";
 		driver.findElement(By.name("lastname")).sendKeys(lastName);
 
 		driver.findElement(By.className("save")).click();
