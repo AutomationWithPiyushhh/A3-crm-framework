@@ -16,35 +16,51 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import generic_utility.FileUtility;
+
 public class CreateContactTest {
 	public static void main(String[] args) throws InterruptedException, IOException {
 //		Get the data from properties file
-		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
+		
+		FileUtility fUtil = new FileUtility();
+		
+		String BROWSER = fUtil.getDataFromPropertiesFile("bro");
+		String URL = fUtil.getDataFromPropertiesFile("url");
+		String USERNAME = fUtil.getDataFromPropertiesFile("un");
+		String PASSWORD = fUtil.getDataFromPropertiesFile("pwd");
+		
+		
+//		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
+//
+//		Properties pObj = new Properties();
+//		pObj.load(fis);
+//
+//		String BROWSER = pObj.getProperty("bro");
+//		String URL = pObj.getProperty("url");
+//		String USERNAME = pObj.getProperty("un");
+//		String PASSWORD = pObj.getProperty("pwd");
 
-		Properties pObj = new Properties();
-		pObj.load(fis);
-
-		String BROWSER = pObj.getProperty("bro");
-		String URL = pObj.getProperty("url");
-		String USERNAME = pObj.getProperty("un");
-		String PASSWORD = pObj.getProperty("pwd");
-
+		
+		
+		
 //		Get the data from excel file
 
-		FileInputStream fis1 = new FileInputStream("./src/test/resources/testScriptData.xlsx");
+//		FileInputStream fis1 = new FileInputStream("./src/test/resources/testScriptData.xlsx");
+//
+//		Workbook wb = WorkbookFactory.create(fis1);
+//
+//		Sheet sh = wb.getSheet("Contact");
+//
+//		Row row = sh.getRow(5);
+//
+//		Cell cell = row.getCell(0);
+//
+//		String lastName = cell.getStringCellValue();
+//
+//		wb.close();
 
-		Workbook wb = WorkbookFactory.create(fis1);
-
-		Sheet sh = wb.getSheet("Contact");
-
-		Row row = sh.getRow(5);
-
-		Cell cell = row.getCell(0);
-
-		String lastName = cell.getStringCellValue();
-
-		wb.close();
-
+		String lastName = fUtil.getDataFromExcelFile("Contact", 5, 0);
+		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));

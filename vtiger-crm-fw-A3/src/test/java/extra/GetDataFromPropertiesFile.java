@@ -9,9 +9,11 @@ public class GetDataFromPropertiesFile {
 //		Get the java rep object of the physical file
 		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
 
+//		by using load(), Load all the keys
 		Properties pObj = new Properties();
 		pObj.load(fis);
 		
+//		fetch all the values by using getProperty("key")
 		String BROWSER = pObj.getProperty("bro");
 		String URL = pObj.getProperty("url");
 		String USERNAME = pObj.getProperty("un");

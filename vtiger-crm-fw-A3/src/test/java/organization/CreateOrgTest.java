@@ -1,9 +1,7 @@
 package organization;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,19 +9,50 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import generic_utility.FileUtility;
+
 public class CreateOrgTest {
 	public static void main(String[] args) throws InterruptedException, IOException {
 
-		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
+////		Get the data from prop file
+//		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
+//
+//		Properties pObj = new Properties();
+//		pObj.load(fis);
+//
+//		String BROWSER = pObj.getProperty("bro");
+//		String URL = pObj.getProperty("url");
+//		String USERNAME = pObj.getProperty("un");
+//		String PASSWORD = pObj.getProperty("pwd");
+		
+		FileUtility fUtil = new FileUtility();
+		
+		String BROWSER = fUtil.getDataFromPropertiesFile("bro");
+		String URL = fUtil.getDataFromPropertiesFile("url");
+		String USERNAME = fUtil.getDataFromPropertiesFile("un");
+		String PASSWORD = fUtil.getDataFromPropertiesFile("pwd");
+		
+		
+		
+//		Get the data from excel file
 
-		Properties pObj = new Properties();
-		pObj.load(fis);
+//		FileInputStream fis1 = new FileInputStream("./src/test/resources/testScriptData.xlsx");
+//
+//		Workbook wb = WorkbookFactory.create(fis1);
+//
+//		Sheet sh = wb.getSheet("Org");
+//
+//		Row row = sh.getRow(5);
+//
+//		Cell cell = row.getCell(0);
+//
+//		String orgName = cell.getStringCellValue() + (int) (Math.random() * 1000);
+//
+//		wb.close();
+		
+		String orgName = fUtil.getDataFromExcelFile("Org", 8, 0) + (int)(Math.random()*9999);
 
-		String BROWSER = pObj.getProperty("bro");
-		String URL = pObj.getProperty("url");
-		String USERNAME = pObj.getProperty("un");
-		String PASSWORD = pObj.getProperty("pwd");
-
+		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -43,7 +72,7 @@ public class CreateOrgTest {
 		driver.findElement(By.linkText("Organizations")).click();
 		driver.findElement(By.cssSelector("img[title='Create Organization...']")).click();
 
-		String orgName = "qsp_" + (int) (Math.random() * 1000);
+//		String orgName = "qsp_" + (int) (Math.random() * 1000);
 		WebElement orgField = driver.findElement(By.name("accountname"));
 		orgField.sendKeys(orgName);
 
