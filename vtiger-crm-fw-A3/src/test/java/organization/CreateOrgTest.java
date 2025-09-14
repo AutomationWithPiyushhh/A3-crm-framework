@@ -10,76 +10,47 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 import generic_utility.FileUtility;
+import object_repository.HomePage;
+import object_repository.LoginPage;
+import object_repository.OrgPage;
+import object_repository.VerifyOrgPage;
 
 public class CreateOrgTest {
 	public static void main(String[] args) throws InterruptedException, IOException {
-
-////		Get the data from prop file
-//		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
-//
-//		Properties pObj = new Properties();
-//		pObj.load(fis);
-//
-//		String BROWSER = pObj.getProperty("bro");
-//		String URL = pObj.getProperty("url");
-//		String USERNAME = pObj.getProperty("un");
-//		String PASSWORD = pObj.getProperty("pwd");
-		
 		FileUtility fUtil = new FileUtility();
-		
+
 		String BROWSER = fUtil.getDataFromPropertiesFile("bro");
 		String URL = fUtil.getDataFromPropertiesFile("url");
 		String USERNAME = fUtil.getDataFromPropertiesFile("un");
 		String PASSWORD = fUtil.getDataFromPropertiesFile("pwd");
-		
-		
-		
-//		Get the data from excel file
 
-//		FileInputStream fis1 = new FileInputStream("./src/test/resources/testScriptData.xlsx");
-//
-//		Workbook wb = WorkbookFactory.create(fis1);
-//
-//		Sheet sh = wb.getSheet("Org");
-//
-//		Row row = sh.getRow(5);
-//
-//		Cell cell = row.getCell(0);
-//
-//		String orgName = cell.getStringCellValue() + (int) (Math.random() * 1000);
-//
-//		wb.close();
-		
-		String orgName = fUtil.getDataFromExcelFile("Org", 8, 0) + (int)(Math.random()*9999);
+		String orgName = fUtil.getDataFromExcelFile("Org", 8, 0) + (int) (Math.random() * 9999);
 
-		
+//		Browser Opening
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
+		LoginPage lp = new LoginPage(driver);
+		HomePage hp = new HomePage(driver);
+		OrgPage op = new OrgPage(driver);
+		VerifyOrgPage vop = new VerifyOrgPage(driver);
+
 		driver.get(URL);
 
 //		Login
-		WebElement username = driver.findElement(By.name("user_name"));
-		username.sendKeys(USERNAME);
-
-		WebElement password = driver.findElement(By.name("user_password"));
-		password.sendKeys(PASSWORD);
-
-		driver.findElement(By.id("submitButton")).click();
+		lp.login(USERNAME, PASSWORD);
 
 //		Create an organization
-		driver.findElement(By.linkText("Organizations")).click();
-		driver.findElement(By.cssSelector("img[title='Create Organization...']")).click();
+		hp.getOrgLink().click();
 
-//		String orgName = "qsp_" + (int) (Math.random() * 1000);
-		WebElement orgField = driver.findElement(By.name("accountname"));
+		op.getPlusIcon().click();
+
+		WebElement orgField = op.getOrgField();
 		orgField.sendKeys(orgName);
+		op.getSaveBtn().click();
 
-		driver.findElement(By.cssSelector("input[title='Save [Alt+S]']")).click();
-
-		String actOrgName = driver.findElement(By.id("dtlview_Organization Name")).getText();
-
+		String actOrgName = vop.getActOrgName();
 		if (actOrgName.equals(orgName)) {
 			System.out.println("Created organization successfullyyyy!!!");
 		} else {
@@ -87,18 +58,13 @@ public class CreateOrgTest {
 		}
 
 //		Logout
-		WebElement profile = driver.findElement(By.cssSelector("img[src='themes/softed/images/user.PNG']"));
-
-		Thread.sleep(50000);
+		WebElement profile = hp.getProfile();
 
 		Actions act = new Actions(driver);
 		act.moveToElement(profile).build().perform();
-
-		driver.findElement(By.linkText("Sign Out")).click();
+		hp.getSignOut().click();
 
 		Thread.sleep(2000);
-
 		driver.quit();
-
 	}
 }
