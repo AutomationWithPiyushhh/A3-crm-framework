@@ -1,31 +1,25 @@
 package testng_extra;
 
-import org.testng.Reporter;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Demo1 {
 
-	@Test
-	public void case1() throws InterruptedException {
-//		Console
-		System.out.println("hey case 1");
-//		Report
-		Reporter.log("Hey case 1");
+	@Test(invocationCount = 5)
+	public void create() throws InterruptedException {
+		System.out.println("create Pant samrajya");
+		Assert.assertTrue(true);
 	}
 
-	@Test
-	public void case2() throws InterruptedException {
-		System.out.println("hey case 2");
-		Reporter.log("Hey case 2");
+	@Test(invocationCount = 3)
+	public void modify() throws InterruptedException {
+		System.out.println("Pant -> Mahishmati");
 	}
 
-	@Test
-	public void case3() throws InterruptedException {
-		System.out.println("hey case 3");
-		Reporter.log("Hey case 3");
+	@Test(invocationCount = 0)
+	public void delete() throws InterruptedException {
+		System.out.println("Delete mahishmati");
 	}
-//	public static void main(String[] args) {
-//		System.out.println("hey");
-//	}
+
 
 }
