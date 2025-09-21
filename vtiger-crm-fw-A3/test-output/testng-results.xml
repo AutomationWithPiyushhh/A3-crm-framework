@@ -2,60 +2,32 @@
 <testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-09-21T12:45:10 IST" name="Default suite" finished-at="2025-09-21T12:45:21 IST" duration-ms="10954">
+  <suite started-at="2025-09-21T14:14:27 IST" name="Suite" finished-at="2025-09-21T14:14:35 IST" duration-ms="7821">
     <groups>
     </groups>
-    <test started-at="2025-09-21T12:45:10 IST" name="Default test" finished-at="2025-09-21T12:45:21 IST" duration-ms="10954">
-      <class name="testng_extra.TwoDimensionArray">
-        <test-method signature="fbLogin(java.lang.String,java.lang.String)[pri:0, instance:testng_extra.TwoDimensionArray@4c12331b]" started-at="2025-09-21T12:45:10 IST" name="fbLogin" data-provider="studData" finished-at="2025-09-21T12:45:14 IST" duration-ms="4110" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[dinga]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[dingi@123]]>
-              </value>
-            </param>
-          </params>
+    <test started-at="2025-09-21T14:14:27 IST" name="TestRunner2" finished-at="2025-09-21T14:14:35 IST" duration-ms="7820">
+      <class name="typesOfExecution.Demo1">
+        <test-method signature="case1()[pri:0, instance:typesOfExecution.Demo1@247bddad]" started-at="2025-09-21T14:14:27 IST" name="case1" finished-at="2025-09-21T14:14:35 IST" duration-ms="7754" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- fbLogin -->
-        <test-method signature="fbLogin(java.lang.String,java.lang.String)[pri:0, instance:testng_extra.TwoDimensionArray@4c12331b]" started-at="2025-09-21T12:45:14 IST" name="fbLogin" data-provider="studData" finished-at="2025-09-21T12:45:18 IST" duration-ms="3476" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[dingi]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[dinga@123]]>
-              </value>
-            </param>
-          </params>
+        </test-method> <!-- case1 -->
+      </class> <!-- typesOfExecution.Demo1 -->
+    </test> <!-- TestRunner2 -->
+    <test started-at="2025-09-21T14:14:27 IST" name="TestRunner1" finished-at="2025-09-21T14:14:35 IST" duration-ms="7821">
+      <class name="typesOfExecution.Demo1">
+        <test-method signature="case1()[pri:0, instance:typesOfExecution.Demo1@1d296da]" started-at="2025-09-21T14:14:27 IST" name="case1" finished-at="2025-09-21T14:14:35 IST" duration-ms="7754" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- fbLogin -->
-        <test-method signature="fbLogin(java.lang.String,java.lang.String)[pri:0, instance:testng_extra.TwoDimensionArray@4c12331b]" started-at="2025-09-21T12:45:18 IST" name="fbLogin" data-provider="studData" finished-at="2025-09-21T12:45:21 IST" duration-ms="3305" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[dingu]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[DingaLovesDingi]]>
-              </value>
-            </param>
-          </params>
+        </test-method> <!-- case1 -->
+      </class> <!-- typesOfExecution.Demo1 -->
+    </test> <!-- TestRunner1 -->
+    <test started-at="2025-09-21T14:14:27 IST" name="TestRunner3" finished-at="2025-09-21T14:14:35 IST" duration-ms="7803">
+      <class name="typesOfExecution.Demo1">
+        <test-method signature="case1()[pri:0, instance:typesOfExecution.Demo1@7770f470]" started-at="2025-09-21T14:14:27 IST" name="case1" finished-at="2025-09-21T14:14:35 IST" duration-ms="7727" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- fbLogin -->
-      </class> <!-- testng_extra.TwoDimensionArray -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- case1 -->
+      </class> <!-- typesOfExecution.Demo1 -->
+    </test> <!-- TestRunner3 -->
+  </suite> <!-- Suite -->
 </testng-results>

@@ -9,6 +9,14 @@ import org.testng.annotations.Test;
 
 public class TwoDimensionArray {
 
+	@Test(enabled = false)
+	public void bulls() throws InterruptedException {
+		System.out.println("run bull run");
+		Thread.sleep(2000);
+	}
+	
+	
+	
 	@Test(dataProvider = "studData")
 	public void fbLogin(String username, String password) throws InterruptedException {
 		WebDriver driver = new ChromeDriver();
@@ -19,7 +27,6 @@ public class TwoDimensionArray {
 
 		Thread.sleep(1000);
 		driver.quit();
-
 	}
 
 	@DataProvider

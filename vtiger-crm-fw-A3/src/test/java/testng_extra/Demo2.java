@@ -5,23 +5,19 @@ import org.testng.annotations.Test;
 
 public class Demo2 {
 
-	@Test
+	@Test(invocationCount = 2)
 	public void case1() throws InterruptedException {
-//		Report
-		Reporter.log("Hey case 1", true);
+		System.out.println("Hey");
 	}
 
 	@Test
 	public void case2() throws InterruptedException {
-		Reporter.log("Hey case 2", true);
+		System.out.println("How are you !!!");
 	}
 
-	@Test
+	@Test(enabled = false)
 	public void case3() throws InterruptedException {
-		Reporter.log("Hey case 3", true);
+		System.out.println("I am fine !!!");
 	}
-//	public static void main(String[] args) {
-//		System.out.println("hey");
-//	}
 
 }
