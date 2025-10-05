@@ -6,8 +6,7 @@
       <class name="advance_reports_extra.Demo">
         <methods>
           <include name="case2"/>
-          <include name="repBackup"/>
-          <include name="repConfig"/>
+          <include name="case1"/>
           <include name="case3"/>
         </methods>
       </class> <!-- advance_reports_extra.Demo -->
