@@ -3,11 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="extra_assertion.WorkingWithSoftAssert">
+      <class name="advance_reports_extra.Demo">
         <methods>
-          <include name="case1"/>
+          <include name="case2"/>
+          <include name="repBackup"/>
+          <include name="repConfig"/>
+          <include name="case3"/>
         </methods>
-      </class> <!-- extra_assertion.WorkingWithSoftAssert -->
+      </class> <!-- advance_reports_extra.Demo -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
