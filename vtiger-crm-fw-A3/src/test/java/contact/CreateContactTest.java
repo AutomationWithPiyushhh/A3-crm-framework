@@ -1,113 +1,30 @@
 package contact;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.Duration;
-import java.util.Properties;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
+import base_utility.BaseClass;
 import generic_utility.FileUtility;
 
-public class CreateContactTest {
-	public static void main(String[] args) throws InterruptedException, IOException {
-//		Get the data from properties file
-		
+public class CreateContactTest extends BaseClass {
+	@Test
+	public void createConTest() throws IOException {
 		FileUtility fUtil = new FileUtility();
-		
-		String BROWSER = fUtil.getDataFromPropertiesFile("bro");
-		String URL = fUtil.getDataFromPropertiesFile("url");
-		String USERNAME = fUtil.getDataFromPropertiesFile("un");
-		String PASSWORD = fUtil.getDataFromPropertiesFile("pwd");
-		
-		
-//		FileInputStream fis = new FileInputStream("./src\\test\\resources\\commondata.properties");
-//
-//		Properties pObj = new Properties();
-//		pObj.load(fis);
-//
-//		String BROWSER = pObj.getProperty("bro");
-//		String URL = pObj.getProperty("url");
-//		String USERNAME = pObj.getProperty("un");
-//		String PASSWORD = pObj.getProperty("pwd");
-
-		
-		
-		
-//		Get the data from excel file
-
-//		FileInputStream fis1 = new FileInputStream("./src/test/resources/testScriptData.xlsx");
-//
-//		Workbook wb = WorkbookFactory.create(fis1);
-//
-//		Sheet sh = wb.getSheet("Contact");
-//
-//		Row row = sh.getRow(5);
-//
-//		Cell cell = row.getCell(0);
-//
-//		String lastName = cell.getStringCellValue();
-//
-//		wb.close();
-
 		String lastName = fUtil.getDataFromExcelFile("Contact", 5, 0);
-		
-		WebDriver driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-
-		driver.get(URL);
-
-//		Login
-		WebElement username = driver.findElement(By.name("user_name"));
-		username.sendKeys(USERNAME);
-
-		WebElement password = driver.findElement(By.name("user_password"));
-		password.sendKeys(PASSWORD);
-
-		driver.findElement(By.id("submitButton")).click();
 
 //		Create new contact
-
 		driver.findElement(By.linkText("Contacts")).click();
 		driver.findElement(By.cssSelector("img[alt='Create Contact...']")).click();
 
 //		Fill the form to create the contact
-//		String lastName = "Singh";
 		driver.findElement(By.name("lastname")).sendKeys(lastName);
 
 		driver.findElement(By.className("save")).click();
 
 		String actLastName = driver.findElement(By.id("dtlview_Last Name")).getText();
-
-		if (actLastName.equals(lastName)) {
-			System.out.println("Created " + lastName + " successfully!!!");
-		} else {
-			System.out.println("Could not be Created contact successfully!!!");
-		}
-
-//		Logout
-		WebElement profile = driver.findElement(By.cssSelector("img[src='themes/softed/images/user.PNG']"));
-
-		Thread.sleep(3000);
-
-		Actions act = new Actions(driver);
-		act.moveToElement(profile).build().perform();
-
-		driver.findElement(By.linkText("Sign Out")).click();
-
-		Thread.sleep(2000);
-
-		driver.quit();
-
+		Assert.assertEquals(actLastName, lastName);
 	}
 }
